@@ -7,7 +7,7 @@ package com.jhonatanrocha.arcadiaquest.diceroller;
 public enum DiceEnum {
 
     MELEE("Ofensive", new Integer[] {1, 3, 5}),
-    RANGED("Ofensive", new Integer[] {2, 3, 4}),
+    RANGED("Ofensive", new Integer[] {2, 4}),
     CRITICAL("Ofensive", new Integer[] {6}),
     DEFENSIVE("Defensive", new Integer[] {2}),
     CRITICAL_DEFENSIVE("Defensive", new Integer[] {5});
