@@ -10,4 +10,5 @@
     <dimen name="label_title">20dp</dimen>
     <dimen name="botton_grid_dice_margin">30dp</dimen>
     <dimen name="bottom_grid_text_margin">65dp</dimen>
+    <dimen name="top_dice_margin">30dp</dimen>
 </resources>

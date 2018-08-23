@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
         buttonFight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isDataValid()) {
+                if(isDataEmpty() && isDataValid()) {
                     Intent intent = new Intent(MainActivity.this, ResultActivity.class);
                     intent.putExtra("inputOfensiveValue", inputOfensiveDice.getText().toString());
                     intent.putExtra("inputDefensiveValue", inputDefenseDice.getText().toString());
@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    protected Boolean isDataValid() {
+    protected Boolean isDataEmpty() {
         Boolean flagIsValid = false;
 
         if(!inputOfensiveDice.getText().toString().isEmpty() &&
@@ -73,4 +73,17 @@ public class MainActivity extends Activity {
         }
         return flagIsValid;
     }
+
+    protected Boolean isDataValid() {
+        Boolean flagIsValid = false;
+
+        Integer qtdOfensiveDice = Integer.parseInt(inputOfensiveDice.getText().toString());
+        Integer qtdDefensiveDice = Integer.parseInt(inputDefenseDice.getText().toString());
+
+        if(qtdOfensiveDice < 100 && qtdDefensiveDice < 100) {
+            flagIsValid = true;
+        }
+        return flagIsValid;
+    }
+
 }
