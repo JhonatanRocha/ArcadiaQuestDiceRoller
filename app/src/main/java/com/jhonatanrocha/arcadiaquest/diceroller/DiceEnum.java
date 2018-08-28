@@ -58,4 +58,59 @@ public enum DiceEnum {
         return resultNumber;
     }
 
+    public static Boolean isMelee(final Integer resultValue) {
+        Boolean flagOffensiveResult = false;
+
+        for (Integer value : DiceEnum.MELEE.getNumbers()) {
+            if(value.equals(resultValue)) {
+                flagOffensiveResult = true;
+            }
+        }
+        return flagOffensiveResult;
+    }
+
+    public static Boolean isRanged(final Integer resultValue) {
+        Boolean flagOffensiveResult = false;
+
+        for (Integer value : DiceEnum.RANGED.getNumbers()) {
+            if(value.equals(resultValue)) {
+                flagOffensiveResult = true;
+            }
+        }
+        return flagOffensiveResult;
+    }
+
+    public static Boolean isCritical(final Integer resultValue) {
+        Boolean flagOffensiveResult = false;
+
+        for (Integer value : DiceEnum.CRITICAL.getNumbers()) {
+            if(value.equals(resultValue)) {
+                flagOffensiveResult = true;
+            }
+        }
+        return flagOffensiveResult;
+    }
+
+    public static Boolean isDefensive(final Integer resultValue) {
+        Boolean flagOffensiveResult = false;
+
+        for (Integer value : DiceEnum.DEFENSIVE.getNumbers()) {
+            if(value.equals(resultValue)) {
+                flagOffensiveResult = true;
+            }
+        }
+        return flagOffensiveResult;
+    }
+
+    public static Boolean isCriticalDefensive(final Integer resultValue) {
+        Boolean flagOffensiveResult = false;
+
+        for (Integer value : DiceEnum.CRITICAL_DEFENSIVE.getNumbers()) {
+            if(value.equals(resultValue)) {
+                flagOffensiveResult = true;
+            }
+        }
+        return flagOffensiveResult;
+    }
+
 }

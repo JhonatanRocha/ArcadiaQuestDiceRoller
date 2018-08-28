@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -17,10 +18,13 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-    private ImageView meleeDiceImage;
-    private ImageView shieldDiceImage;
     private EditText inputOfensiveDice;
     private EditText inputDefenseDice;
+    private CheckBox checkBoxRerollMelee;
+    private CheckBox checkBoxRerollRanged;
+    private CheckBox checkBoxRerollShield;
+    private EditText inputRerollOffensive;
+    private EditText inputRerollDefensive;
     private ImageButton buttonFight;
 
     @Override
@@ -29,6 +33,7 @@ public class MainActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         loadComponents();
+        checkboxesOfensiveOnClickListener();
         fight();
 
     }
@@ -40,21 +45,36 @@ public class MainActivity extends Activity {
     }
 
     protected void loadComponents() {
-        this.meleeDiceImage = (ImageView) findViewById(R.id.imgMeleeLabel);
         this.inputOfensiveDice = (EditText) findViewById(R.id.formDecimalAttack);
-        this.shieldDiceImage = (ImageView) findViewById(R.id.imgDefenseLabel);
         this.inputDefenseDice = (EditText) findViewById(R.id.formDecimalDefense);
         this.buttonFight = (ImageButton) findViewById(R.id.imageButtonThrowDiceId);
+        this.checkBoxRerollMelee = (CheckBox) findViewById(R.id.checkBoxRerollMeleeId);
+        this.checkBoxRerollRanged = (CheckBox) findViewById(R.id.checkBoxRerollRangedId);
+        this.checkBoxRerollShield = (CheckBox) findViewById(R.id.checkBoxRerollShieldId);
+        this.inputRerollOffensive = (EditText) findViewById(R.id.formDecimalRerollAttack);;
+        this.inputRerollDefensive = (EditText) findViewById(R.id.formDecimalRerollDefense);;
     }
 
     protected void fight(){
         buttonFight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isDataEmpty() && isDataValid()) {
+                if(isDataEmpty() && isDataValid() &&
+                        isOffensiveRerollDataValid() && isDefensiveRerollDataValid()) {
                     Intent intent = new Intent(MainActivity.this, ResultActivity.class);
                     intent.putExtra("inputOfensiveValue", inputOfensiveDice.getText().toString());
                     intent.putExtra("inputDefensiveValue", inputDefenseDice.getText().toString());
+
+                    Boolean flagOffensiveReroll = isOffensiveRerollDataValid();
+                    intent.putExtra("flagOffensiveReroll", flagOffensiveReroll.toString());
+
+                    Boolean flagDefensiveReroll = isDefensiveRerollDataValid();
+                    intent.putExtra("flagDefensiveReroll", flagDefensiveReroll.toString());
+
+                    intent.putExtra("flagMeleeReroll", Boolean.toString(checkBoxRerollMelee.isChecked()));
+                    intent.putExtra("flagRangedReroll", Boolean.toString(checkBoxRerollRanged.isChecked()));
+                    intent.putExtra("inputRerollOffensiveValue", inputRerollOffensive.getText().toString());
+                    intent.putExtra("inputRerollDefensiveValue", inputRerollDefensive.getText().toString());
 
                     startActivity(intent);
                 } else {
@@ -77,12 +97,60 @@ public class MainActivity extends Activity {
     protected Boolean isDataValid() {
         Boolean flagIsValid = false;
 
-        Integer qtdOfensiveDice = Integer.parseInt(inputOfensiveDice.getText().toString());
+        Integer qtdOffensiveDice = Integer.parseInt(inputOfensiveDice.getText().toString());
         Integer qtdDefensiveDice = Integer.parseInt(inputDefenseDice.getText().toString());
 
-        if(qtdOfensiveDice < 100 && qtdDefensiveDice < 100) {
+        if(qtdOffensiveDice < 100 && qtdDefensiveDice < 100) {
             flagIsValid = true;
         }
+        return flagIsValid;
+    }
+
+    protected void checkboxesOfensiveOnClickListener() {
+        checkBoxRerollMelee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkBoxRerollRanged.isChecked()) {
+                    checkBoxRerollRanged.setChecked(false);
+                }
+            }
+        });
+
+        checkBoxRerollRanged.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(checkBoxRerollMelee.isChecked()) {
+                    checkBoxRerollMelee.setChecked(false);
+                }
+            }
+        });
+    }
+
+    protected Boolean isOffensiveRerollDataValid() {
+
+        Boolean flagIsValid = false;
+
+        final Integer rollAmount = Integer.parseInt(inputRerollOffensive.getText().toString());
+
+        if(rollAmount < 100 && (checkBoxRerollMelee.isChecked() || checkBoxRerollRanged.isChecked())) {
+            flagIsValid = true;
+        } else if(!checkBoxRerollMelee.isChecked() && !checkBoxRerollRanged.isChecked()) {
+            flagIsValid = true;
+        }
+
+        return flagIsValid;
+    }
+
+    protected Boolean isDefensiveRerollDataValid() {
+
+        Boolean flagIsValid = false;
+
+        final Integer rollAmount = Integer.parseInt(inputRerollDefensive.getText().toString());
+
+        if(rollAmount < 100 && checkBoxRerollShield.isChecked()) {
+            flagIsValid = true;
+        }
+
         return flagIsValid;
     }
 

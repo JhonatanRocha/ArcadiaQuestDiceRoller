@@ -27,6 +27,12 @@ public class ResultActivity extends Activity {
     private TextView textDefensiveCritTotalResult;
     private Integer inputOfensiveValue;
     private Integer inputDefensiveValue;
+    private Boolean flagOffensiveReroll;
+    private Boolean flagDefensiveReroll;
+    private Boolean flagMeleeReroll;
+    private Boolean flagRangedReroll;
+    private Integer inputOffensiveReroll;
+    private Integer inputDefensiveReroll;
     private ImageView backButton;
 
     @Override
@@ -62,6 +68,7 @@ public class ResultActivity extends Activity {
         final Bundle extras = getIntent().getExtras();
         inputOfensiveValue = Integer.parseInt(extras.getString("inputOfensiveValue"));
         inputDefensiveValue = Integer.parseInt(extras.getString("inputDefensiveValue"));
+        initReroll(extras);
         calculateOfensive();
         calculateDefensive();
     }
@@ -76,20 +83,25 @@ public class ResultActivity extends Activity {
 
         for(int i = 0; i < inputOfensiveValue; i++) {
             ofensiveResult  = generator.nextInt(6) + 1;
-            Log.d("RESULTADO DO DADO", ofensiveResult.toString());
-            if(DiceEnum.CRITICAL.equals(DiceEnum.getDice("Ofensive", ofensiveResult))) {
+
+            if(DiceEnum.isCritical(ofensiveResult)) {
                 inputOfensiveValue++;
                 criticalTotal++;
-                Log.d("Debugando 1", inputOfensiveValue.toString());
-                Log.d("Debugando 2", criticalTotal.toString());
-            } else if(DiceEnum.MELEE.equals(DiceEnum.getDice("Ofensive", ofensiveResult))) {
-                meleeTotal++;
-                Log.d("Debugando 3", meleeTotal.toString());
+            } else if(DiceEnum.isMelee(ofensiveResult)) {
+                if(flagRangedReroll && (inputOffensiveReroll != null && inputOffensiveReroll > 0)) {
+                    inputOffensiveReroll--;
+                    inputOfensiveValue++;
+                } else {
+                    meleeTotal++;
+                }
+            } else if(flagMeleeReroll && (inputOffensiveReroll != null && inputOffensiveReroll > 0)) {
+                    inputOffensiveReroll--;
+                    inputOfensiveValue++;
             } else {
                 rangedTotal++;
-                Log.d("Debugando 4", rangedTotal.toString());
             }
         }
+
         setTextViewOfensiveResult(meleeTotal, rangedTotal, criticalTotal);
         setSideMarginsToOfensiveTextView(textMeleeTotalResult);
         setSideMarginsToOfensiveTextView(textRangedTotalResult);
@@ -105,11 +117,14 @@ public class ResultActivity extends Activity {
 
         for(int i = 0; i < inputDefensiveValue; i++) {
             defensiveResult = generator.nextInt(6) + 1;
-            if(DiceEnum.CRITICAL_DEFENSIVE.equals(DiceEnum.getDice("Defensive", defensiveResult))) {
+            if(DiceEnum.isCriticalDefensive(defensiveResult)) {
                 inputDefensiveValue++;
                 blockCriticalTotal++;
-            } else if(DiceEnum.DEFENSIVE.equals(DiceEnum.getDice("Defensive", defensiveResult))){
+            } else if(DiceEnum.isDefensive(defensiveResult)) {
                 blockTotal++;
+            } else if(inputDefensiveReroll != null && inputDefensiveReroll > 0) {
+                inputDefensiveReroll--;
+                inputDefensiveValue++;
             }
         }
         setTextViewDefensiveResult(blockTotal, blockCriticalTotal);
@@ -147,5 +162,16 @@ public class ResultActivity extends Activity {
             textview.setLayoutParams(layoutparams);
         }
     }
+
+    protected void initReroll(final Bundle extras) {
+        flagOffensiveReroll = Boolean.valueOf(extras.getString("flagOffensiveReroll"));
+        flagDefensiveReroll = Boolean.valueOf(extras.getString("flagDefensiveReroll"));
+        flagMeleeReroll = Boolean.valueOf(extras.getString("flagMeleeReroll"));
+        flagRangedReroll = Boolean.valueOf(extras.getString("flagRangedReroll"));
+        inputOffensiveReroll = Integer.parseInt(extras.getString("inputRerollOffensiveValue"));
+        inputDefensiveReroll = Integer.parseInt(extras.getString("inputRerollDefensiveValue"));
+    }
+
+
 }
 

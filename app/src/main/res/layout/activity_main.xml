@@ -14,154 +14,271 @@
 
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/labelLinearLayoutId"
-        android:layout_above="@+id/linearLayoutForms"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:text="ATTACK"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/labelAttackId"
-            android:textStyle="normal|bold"
-            android:textAlignment="center"
-            android:textSize="@dimen/label_title"
-            android:layout_weight="1"
-            android:textColor="@android:color/black" />
+            android:layout_weight="1">
 
-        <TextView
-            android:text="DEFENSE"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:src="@drawable/ac_app_thumb"
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:cropToPadding="true"
+                android:scaleType="fitCenter"
+                android:layout_weight="1"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_height="120dp"
+                android:adjustViewBounds="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/labelDefenseId"
-            android:textAlignment="center"
-            android:textSize="@dimen/label_title"
-            android:layout_weight="1"
-            android:textStyle="normal|bold"
-            android:textColor="@android:color/black" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:layout_above="@+id/labelLinearLayoutId"
-        android:layout_centerHorizontal="true">
+            android:id="@+id/linearLayout1"
+            android:layout_above="@+id/labelLinearLayoutId"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="623.77"
+            android:padding="5dp">
 
 
-        <ImageView
-            android:layout_width="@dimen/dice_dimension"
-            android:layout_height="@dimen/dice_dimension"
-            android:src="@drawable/symbol_melee"
-            android:id="@+id/imgMeleeLabel"
-            android:scaleType="fitStart"
-            android:layout_margin="30dp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
 
-        <ImageView
-            android:layout_width="@dimen/dice_dimension"
-            android:layout_height="@dimen/dice_dimension"
-            android:src="@drawable/symbol_block"
-            android:id="@+id/imgDefenseLabel"
-            android:layout_weight="1"
-            android:scaleType="fitStart"
-            android:layout_margin="30dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_dice_dimension"
+                    android:src="@drawable/symbol_melee"
+                    android:id="@+id/imgMeleeLabel"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true" />
 
-    </LinearLayout>
+                <TextView
+                    android:text="ATTACK"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/labelAttackId"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/label_title"
+                    android:textColor="@android:color/black" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="44dp"
-        android:layout_below="@+id/linearLayoutForms"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+                <EditText
+                    android:layout_height="@dimen/heightDecimalForms"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/formDecimalAttack"
+                    android:background="@android:color/background_light"
+                    android:selectAllOnFocus="false"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:text="0"
+                    android:layout_width="@dimen/decimalForm"
+                    android:layout_gravity="center" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center">
 
-    <TextView
-        android:text="ROLL"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/labelRollId"
-        android:textStyle="normal|bold"
-        android:textAlignment="center"
-        android:textSize="@dimen/label_title"
-        android:layout_weight="1"
-        android:textColor="@android:color/black"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_dice_dimension"
+                    android:src="@drawable/symbol_block"
+                    android:id="@+id/imgDefenseLabel"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true" />
 
-    <ImageButton
-        android:src="@drawable/dices"
-        android:id="@+id/imageButtonThrowDiceId"
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="?android:selectableItemBackground"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="false"
-        android:layout_above="@+id/labelRollId"
-        android:layout_centerHorizontal="true" />
+                <TextView
+                    android:text="DEFENSE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/labelDefenseId"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/label_title"
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/black" />
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayoutForms"
-        android:layout_above="@+id/imageButtonThrowDiceId"
-        android:layout_centerHorizontal="true">
+                <EditText
+                    android:layout_height="@dimen/heightDecimalForms"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/formDecimalDefense"
+                    android:background="@android:color/background_light"
+                    android:selectAllOnFocus="false"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:layout_width="@dimen/decimalForm"
+                    android:layout_gravity="center"
+                    android:text="0" />
+            </LinearLayout>
 
-        <EditText
-            android:layout_width="@dimen/decimalForm"
-            android:layout_height="@dimen/heightDecimalForms"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/formDecimalAttack"
-            android:background="@android:color/background_light"
-            android:layout_margin="10dp"
-            android:selectAllOnFocus="false"
-            android:textAlignment="center"
-            android:textColor="@android:color/black" />
+        </LinearLayout>
 
-        <EditText
-            android:layout_width="@dimen/decimalForm"
-            android:layout_height="@dimen/heightDecimalForms"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/formDecimalDefense"
-            android:background="@android:color/background_light"
-            android:layout_margin="10dp"
-            android:selectAllOnFocus="false"
-            android:textAlignment="center"
-            android:textColor="@android:color/black" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.27">
 
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_dice_dimension"
+                    android:src="@drawable/reroll"
+                    android:id="@+id/imageView2"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="fitCenter" />
 
-        <ImageView
-            android:src="@drawable/ac_app_thumb"
-            android:id="@+id/imageView"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:adjustViewBounds="true"
-            android:cropToPadding="true"
-            android:scaleType="fitStart"
-            android:layout_weight="1"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center">
+
+                    <CheckBox
+                        android:text="Melee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/checkBoxRerollMeleeId"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold"
+                        android:textSize="@dimen/checkboxLabelSize"/>
+
+                    <CheckBox
+                        android:text="Ranged"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/checkBoxRerollRangedId"
+                        android:layout_weight="1"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold"
+                        android:textSize="@dimen/checkboxLabelSize"/>
+
+                </LinearLayout>
+
+                <EditText
+                    android:layout_width="@dimen/decimalForm"
+                    android:layout_height="@dimen/heightDecimalForms"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/formDecimalRerollAttack"
+                    android:text="0"
+                    android:background="@android:color/background_light"
+                    android:textAlignment="center"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_dice_dimension"
+                    android:src="@drawable/reroll"
+                    android:id="@+id/imageView3"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="fitCenter" />
+
+                <CheckBox
+                    android:text="Shield"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/checkBoxRerollShieldId"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:duplicateParentState="false"
+                    android:clickable="false"
+                    android:layout_gravity="center"
+                    android:textColor="@android:color/black"
+                    android:textStyle="normal|bold"
+                    android:textSize="@dimen/checkboxLabelSize" />
+
+                <EditText
+                    android:layout_width="@dimen/decimalForm"
+                    android:layout_height="@dimen/heightDecimalForms"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/formDecimalRerollDefense"
+                    android:layout_weight="1"
+                    android:text="0"
+                    android:background="@android:color/background_light"
+                    android:textAlignment="center"
+                    android:layout_gravity="center" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linearLayoutForms"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/linearLayout">
+
+            <ImageButton
+                android:src="@drawable/dices"
+                android:id="@+id/imageButtonThrowDiceId"
+                android:layout_width="wrap_content"
+                android:background="?android:selectableItemBackground"
+                android:scaleType="fitCenter"
+                android:layout_above="@+id/labelRollId"
+                android:layout_centerHorizontal="true"
+                android:adjustViewBounds="true"
+                android:cropToPadding="true"
+                android:layout_gravity="center"
+                android:layout_height="80dp" />
+
+            <TextView
+                android:text="ROLL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/labelRollId"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:textSize="@dimen/label_title"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
