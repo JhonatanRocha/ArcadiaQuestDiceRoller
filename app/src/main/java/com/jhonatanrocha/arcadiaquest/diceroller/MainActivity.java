@@ -9,14 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+import java.util.List;
+
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
     private EditText inputOfensiveDice;
     private EditText inputDefenseDice;
@@ -25,6 +30,7 @@ public class MainActivity extends Activity {
     private CheckBox checkBoxRerollShield;
     private EditText inputRerollOffensive;
     private EditText inputRerollDefensive;
+    private Spinner offensiveSelector;
     private ImageButton buttonFight;
 
     @Override
@@ -35,7 +41,6 @@ public class MainActivity extends Activity {
         loadComponents();
         checkboxesOfensiveOnClickListener();
         fight();
-
     }
 
     @Override
@@ -51,8 +56,16 @@ public class MainActivity extends Activity {
         this.checkBoxRerollMelee = (CheckBox) findViewById(R.id.checkBoxRerollMeleeId);
         this.checkBoxRerollRanged = (CheckBox) findViewById(R.id.checkBoxRerollRangedId);
         this.checkBoxRerollShield = (CheckBox) findViewById(R.id.checkBoxRerollShieldId);
-        this.inputRerollOffensive = (EditText) findViewById(R.id.formDecimalRerollAttack);;
-        this.inputRerollDefensive = (EditText) findViewById(R.id.formDecimalRerollDefense);;
+        this.inputRerollOffensive = (EditText) findViewById(R.id.formDecimalRerollAttack);
+        this.inputRerollDefensive = (EditText) findViewById(R.id.formDecimalRerollDefense);
+        this.offensiveSelector = (Spinner) findViewById(R.id.offensiveSelector);
+
+        ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(this, R.array.offensiveMethod,
+                android.R.layout.simple_spinner_item);
+        //dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        offensiveSelector.setAdapter(dataAdapter);
+        offensiveSelector.setOnItemSelectedListener(this);
     }
 
     protected void fight(){
@@ -154,4 +167,13 @@ public class MainActivity extends Activity {
         return flagIsValid;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

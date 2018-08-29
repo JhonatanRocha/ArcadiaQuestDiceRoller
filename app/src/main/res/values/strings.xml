@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Arcadia Quest Dice Roller</string>
+
+    <string-array name="offensiveMethod">
+        <item>Melee</item>
+        <item>Ranged</item>
+    </string-array>
 </resources>
