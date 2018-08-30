@@ -28,7 +28,6 @@ public class ResultActivity extends Activity {
     private Integer inputOfensiveValue;
     private Integer inputDefensiveValue;
     private Boolean flagOffensiveReroll;
-    private Boolean flagDefensiveReroll;
     private Boolean flagMeleeReroll;
     private Boolean flagRangedReroll;
     private Integer inputOffensiveReroll;
@@ -88,13 +87,13 @@ public class ResultActivity extends Activity {
                 inputOfensiveValue++;
                 criticalTotal++;
             } else if(DiceEnum.isMelee(ofensiveResult)) {
-                if(flagRangedReroll && (inputOffensiveReroll != null && inputOffensiveReroll > 0)) {
+                if(flagOffensiveReroll && flagRangedReroll && (inputOffensiveReroll != null && inputOffensiveReroll > 0)) {
                     inputOffensiveReroll--;
                     inputOfensiveValue++;
                 } else {
                     meleeTotal++;
                 }
-            } else if(flagMeleeReroll && (inputOffensiveReroll != null && inputOffensiveReroll > 0)) {
+            } else if(flagOffensiveReroll && flagMeleeReroll && (inputOffensiveReroll != null && inputOffensiveReroll > 0)) {
                     inputOffensiveReroll--;
                     inputOfensiveValue++;
             } else {
@@ -165,7 +164,6 @@ public class ResultActivity extends Activity {
 
     protected void initReroll(final Bundle extras) {
         flagOffensiveReroll = Boolean.valueOf(extras.getString("flagOffensiveReroll"));
-        flagDefensiveReroll = Boolean.valueOf(extras.getString("flagDefensiveReroll"));
         flagMeleeReroll = Boolean.valueOf(extras.getString("flagMeleeReroll"));
         flagRangedReroll = Boolean.valueOf(extras.getString("flagRangedReroll"));
         inputOffensiveReroll = Integer.parseInt(extras.getString("inputRerollOffensiveValue"));

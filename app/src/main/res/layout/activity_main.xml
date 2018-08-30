@@ -162,24 +162,25 @@
                     android:layout_gravity="center">
 
                     <CheckBox
-                        android:text="Melee"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/checkBoxRerollMeleeId"
+                        android:id="@+id/checkBoxRerollOffensiveId"
                         android:layout_weight="1"
                         android:textColor="@android:color/black"
                         android:textStyle="normal|bold"
-                        android:textSize="@dimen/checkboxLabelSize"/>
+                        android:textSize="@dimen/checkboxLabelSize" />
 
-                    <CheckBox
-                        android:text="Ranged"
-                        android:layout_width="match_parent"
+                    <Spinner
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/checkBoxRerollRangedId"
-                        android:layout_weight="1"
-                        android:textColor="@android:color/black"
-                        android:textStyle="normal|bold"
-                        android:textSize="@dimen/checkboxLabelSize"/>
+                        android:entries="@array/offensiveMethod"
+                        android:id="@+id/offensiveSelector"
+                        android:spinnerMode="dropdown"
+                        android:layout_gravity="center"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:popupBackground="@android:color/background_light" />
+                    <!--style="@style/Widget.AppCompat.Spinner"-->
+                    <!--android:background="@android:color/transparent"/>-->
 
                 </LinearLayout>
 
@@ -213,7 +214,7 @@
                     android:scaleType="fitCenter" />
 
                 <CheckBox
-                    android:text="Shield"
+                    android:text="SHIELD"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/checkBoxRerollShieldId"
@@ -224,7 +225,7 @@
                     android:layout_gravity="center"
                     android:textColor="@android:color/black"
                     android:textStyle="normal|bold"
-                    android:textSize="@dimen/checkboxLabelSize" />
+                    android:textSize="@dimen/label_title" />
 
                 <EditText
                     android:layout_width="@dimen/decimalForm"
@@ -262,18 +263,6 @@
                 android:cropToPadding="true"
                 android:layout_gravity="center"
                 android:layout_height="80dp" />
-
-            <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/offensiveMethod"
-                android:id="@+id/offensiveSelector"
-                android:spinnerMode="dropdown"
-                android:layout_gravity="center"
-                style="@style/Widget.AppCompat.Spinner"
-                android:popupBackground="@android:color/background_light" />
-                <!--style="@style/Widget.AppCompat.Spinner"-->
-                <!--android:background="@android:color/transparent"/>-->
 
             <TextView
                 android:text="ROLL"

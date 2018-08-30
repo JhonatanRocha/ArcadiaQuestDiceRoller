@@ -10,7 +10,7 @@
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Spinner">
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">80dp</item>
+        <item name="android:textSize">10dp</item>
     </style>
 
 </resources>
