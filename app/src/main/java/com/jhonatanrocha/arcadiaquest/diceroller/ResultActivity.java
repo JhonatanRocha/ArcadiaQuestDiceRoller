@@ -1,20 +1,14 @@
 package com.jhonatanrocha.arcadiaquest.diceroller;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Random;
 
@@ -28,6 +22,7 @@ public class ResultActivity extends Activity {
     private Integer inputOfensiveValue;
     private Integer inputDefensiveValue;
     private Boolean flagOffensiveReroll;
+    private Boolean flagDefensiveReroll;
     private Boolean flagMeleeReroll;
     private Boolean flagRangedReroll;
     private Integer inputOffensiveReroll;
@@ -121,7 +116,7 @@ public class ResultActivity extends Activity {
                 blockCriticalTotal++;
             } else if(DiceEnum.isDefensive(defensiveResult)) {
                 blockTotal++;
-            } else if(inputDefensiveReroll != null && inputDefensiveReroll > 0) {
+            } else if(flagDefensiveReroll && inputDefensiveReroll != null && inputDefensiveReroll > 0) {
                 inputDefensiveReroll--;
                 inputDefensiveValue++;
             }
@@ -164,12 +159,12 @@ public class ResultActivity extends Activity {
 
     protected void initReroll(final Bundle extras) {
         flagOffensiveReroll = Boolean.valueOf(extras.getString("flagOffensiveReroll"));
+        flagDefensiveReroll = Boolean.valueOf(extras.getString("flagDefensiveReroll"));
         flagMeleeReroll = Boolean.valueOf(extras.getString("flagMeleeReroll"));
         flagRangedReroll = Boolean.valueOf(extras.getString("flagRangedReroll"));
         inputOffensiveReroll = Integer.parseInt(extras.getString("inputRerollOffensiveValue"));
         inputDefensiveReroll = Integer.parseInt(extras.getString("inputRerollDefensiveValue"));
     }
-
 
 }
 

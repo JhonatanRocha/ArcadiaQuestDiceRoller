@@ -6,11 +6,11 @@ package com.jhonatanrocha.arcadiaquest.diceroller;
 
 public enum DiceEnum {
 
-    MELEE("Ofensive", new Integer[] {1, 3, 5}),
-    RANGED("Ofensive", new Integer[] {2, 4}),
+    MELEE("Ofensive", new Integer[] {1, 3, 4}),
+    RANGED("Ofensive", new Integer[] {2, 5}),
     CRITICAL("Ofensive", new Integer[] {6}),
-    DEFENSIVE("Defensive", new Integer[] {2}),
-    CRITICAL_DEFENSIVE("Defensive", new Integer[] {5});
+    DEFENSIVE("Defensive", new Integer[] {1}),
+    CRITICAL_DEFENSIVE("Defensive", new Integer[] {6});
 
     private String typeName;
     private Integer[] numbers;

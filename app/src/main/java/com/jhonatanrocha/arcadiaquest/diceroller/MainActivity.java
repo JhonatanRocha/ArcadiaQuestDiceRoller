@@ -5,32 +5,31 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Arrays;
-import java.util.List;
-
+/**
+ * <p>Class that represents the Main Activity of the App.</p>
+ *
+ * @author Jhonatan Rocha
+ * @version 1.0
+ * @since 2018-08-21
+ */
 public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener {
 
-    private EditText inputOfensiveDice;
+    private EditText inputOffensiveDice;
     private EditText inputDefenseDice;
     private CheckBox checkBoxRerollOffensive;
     private CheckBox checkBoxRerollShield;
@@ -48,14 +47,22 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         fight();
     }
 
+    /**
+     *<p>Overriding the Method from Super Class,
+     *<br>to Keep the Screen Orientation to just Portrait.
+     * @param newConfig ({@link Configuration})
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
+    /**
+     *<p>Load all the Components from the Main Activity.</p>
+     */
     protected void loadComponents() {
-        this.inputOfensiveDice = (EditText) findViewById(R.id.formDecimalAttack);
+        this.inputOffensiveDice = (EditText) findViewById(R.id.formDecimalAttack);
         this.inputDefenseDice = (EditText) findViewById(R.id.formDecimalDefense);
         this.buttonFight = (ImageButton) findViewById(R.id.imageButtonThrowDiceId);
         this.checkBoxRerollOffensive = (CheckBox) findViewById(R.id.checkBoxRerollOffensiveId);
@@ -65,14 +72,18 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         configOffensiveSpinner();
     }
 
+    /**
+     * <p>Action of the Button</p>
+     */
     protected void fight(){
         buttonFight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(isDataEmpty() && isDataValid() &&
-                        isOffensiveRerollDataValid() && isDefensiveRerollDataValid()) {
+                        isRerollDataValid(inputRerollOffensive, checkBoxRerollOffensive) &&
+                        isRerollDataValid(inputRerollDefensive, checkBoxRerollShield)) {
                     Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                    intent.putExtra("inputOfensiveValue", inputOfensiveDice.getText().toString());
+                    intent.putExtra("inputOfensiveValue", inputOffensiveDice.getText().toString());
                     intent.putExtra("inputDefensiveValue", inputDefenseDice.getText().toString());
                     intent.putExtra("inputRerollOffensiveValue", inputRerollOffensive.getText().toString());
                     intent.putExtra("inputRerollDefensiveValue", inputRerollDefensive.getText().toString());
@@ -82,10 +93,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                     intent.putExtra("flagRangedReroll",
                             offensiveSelector.getSelectedItem().toString().equals("RANGED") ? "true" : "false");
 
-                    Boolean flagDefensiveReroll = isDefensiveRerollDataValid();
-                    intent.putExtra("flagDefensiveReroll", flagDefensiveReroll.toString());
+                    intent.putExtra("flagDefensiveReroll", Boolean.toString(checkBoxRerollShield.isChecked()));
                     intent.putExtra("flagOffensiveReroll", Boolean.toString(checkBoxRerollOffensive.isChecked()));
-
 
                     startActivity(intent);
                 } else {
@@ -95,20 +104,28 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         });
     }
 
+    /**
+     * <p>Check if the Offensive and Defensive Input is Empty.</p>
+     * @return {@link Boolean}
+     */
     protected Boolean isDataEmpty() {
         Boolean flagIsValid = false;
 
-        if(!inputOfensiveDice.getText().toString().isEmpty() &&
+        if(!inputOffensiveDice.getText().toString().isEmpty() &&
                 !inputDefenseDice.getText().toString().isEmpty()) {
             flagIsValid = true;
         }
         return flagIsValid;
     }
 
+    /**
+     * <p>Check if the Offensive and Defensive Input is Valid.</p>
+     * @return {@link Boolean}
+     */
     protected Boolean isDataValid() {
         Boolean flagIsValid = false;
 
-        Integer qtdOffensiveDice = Integer.parseInt(inputOfensiveDice.getText().toString());
+        Integer qtdOffensiveDice = Integer.parseInt(inputOffensiveDice.getText().toString());
         Integer qtdDefensiveDice = Integer.parseInt(inputDefenseDice.getText().toString());
 
         if(qtdOffensiveDice < 100 && qtdDefensiveDice < 100) {
@@ -117,38 +134,33 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         return flagIsValid;
     }
 
-    protected Boolean isOffensiveRerollDataValid() {
-
+    /**
+     * <p>Check if the Reroll is Valid by Checking the Checkbox state and input values.</p>
+     * @param input ({@link EditText})
+     * @param checkBox ({@link CheckBox})
+     * @return {@link Boolean}
+     */
+    protected Boolean isRerollDataValid(final EditText input, final CheckBox checkBox) {
         Boolean flagIsValid = false;
 
-        final Integer rollAmount = Integer.parseInt(inputRerollOffensive.getText().toString());
-
-        if(rollAmount < 100 && checkBoxRerollOffensive.isChecked()) {
-            flagIsValid = true;
-        } else if(!checkBoxRerollOffensive.isChecked()) {
-            flagIsValid = true;
+        if(!input.getText().toString().isEmpty()) {
+            final Integer rollAmount = Integer.parseInt(input.getText().toString());
+            if(checkBox.isChecked() && rollAmount < 100) {
+                flagIsValid = true;
+            } else if(!checkBox.isChecked()) {
+                flagIsValid = true;
+            }
         }
-
         return flagIsValid;
     }
 
-    protected Boolean isDefensiveRerollDataValid() {
-
-        Boolean flagIsValid = false;
-
-        final Integer rollAmount = Integer.parseInt(inputRerollDefensive.getText().toString());
-
-        if(rollAmount < 100 && checkBoxRerollShield.isChecked()) {
-            flagIsValid = true;
-        }
-
-        return flagIsValid;
-    }
-
+    /**
+     * <p>Method to Config the Offensive Spinner.</p>
+     */
     protected void configOffensiveSpinner() {
         this.offensiveSelector = (Spinner) findViewById(R.id.offensiveSelector);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
+        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
                 getResources().getStringArray(R.array.offensiveMethod)) {
 
             public View getView(int position, View convertView, ViewGroup parent) {
@@ -161,8 +173,7 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                 return v;
             }
         };
-//        ArrayAdapter<CharSequence> dataAdapter = ArrayAdapter.createFromResource(this, R.array.offensiveMethod,
-//                android.R.layout.simple_spinner_item);
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         offensiveSelector.setAdapter(dataAdapter);
         offensiveSelector.setOnItemSelectedListener(this);
