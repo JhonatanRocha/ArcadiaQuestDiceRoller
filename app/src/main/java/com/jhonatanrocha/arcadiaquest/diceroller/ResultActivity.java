@@ -93,9 +93,6 @@ public class ResultActivity extends Activity {
         }
 
         setTextViewOfensiveResult(meleeTotal, rangedTotal, criticalTotal);
-        /*setSideMarginsToOfensiveTextView(textMeleeTotalResult);
-        setSideMarginsToOfensiveTextView(textRangedTotalResult);
-        setSideMarginsToOfensiveTextView(textCriticalTotalResult);*/
     }
 
     protected void calculateDefensive() {
@@ -115,8 +112,6 @@ public class ResultActivity extends Activity {
             }
         }
         setTextViewDefensiveResult(blockTotal, blockCriticalTotal);
-        setSideMarginsToDefensiveTextView(textDefensiveTotalResult);
-        setSideMarginsToDefensiveTextView(textDefensiveCritTotalResult);
     }
 
     protected void setTextViewOfensiveResult(final Integer meleeTotal, final Integer rangedTotal, final Integer criticalTotal) {
@@ -128,26 +123,6 @@ public class ResultActivity extends Activity {
     protected void setTextViewDefensiveResult(final Integer blockTotal, final Integer blockCriticalTotal) {
         textDefensiveTotalResult.setText(blockTotal.toString());
         textDefensiveCritTotalResult.setText(blockCriticalTotal.toString());
-    }
-
-    /*protected void setSideMarginsToOfensiveTextView(TextView textview) {
-        final Integer textViewIntValue = Integer.parseInt(textview.getText().toString());
-
-        if(textViewIntValue >= 10) {
-            final GridLayout.LayoutParams layoutparams = (GridLayout.LayoutParams) textview.getLayoutParams();
-            layoutparams.setMargins(15, 0, 15, 0);
-            textview.setLayoutParams(layoutparams);
-        }
-    }*/
-
-    protected void setSideMarginsToDefensiveTextView(TextView textview) {
-        final Integer textViewIntValue = Integer.parseInt(textview.getText().toString());
-
-        if(textViewIntValue >= 10) {
-            final GridLayout.LayoutParams layoutparams = (GridLayout.LayoutParams) textview.getLayoutParams();
-            layoutparams.setMargins(70, 0, 70, 0);
-            textview.setLayoutParams(layoutparams);
-        }
     }
 
     protected void initReroll(final Bundle extras) {
