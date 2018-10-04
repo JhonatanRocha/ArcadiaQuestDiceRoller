@@ -20,132 +20,108 @@
         android:layout_height="wrap_content"
         android:weightSum="1">
 
-        <GridLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:columnCount="3"
             android:id="@+id/gridOffensiveResultId">
 
             <ImageView
-                android:layout_width="@dimen/dice_dimension"
-                android:layout_height="@dimen/dice_dimension"
+                android:layout_width="@dimen/offensive_dice_dimension"
+                android:layout_height="@dimen/dice_dimension_heigth"
                 android:id="@+id/imgMeleeId"
                 android:layout_weight="1"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:src="@drawable/symbol_melee"
                 android:layout_marginLeft="@dimen/dice_margin"
                 android:layout_marginRight="@dimen/dice_margin"
                 android:contentDescription="Image of Melee Dice" />
 
-            <ImageView
-                android:layout_width="@dimen/dice_dimension"
-                android:layout_height="@dimen/dice_dimension"
-                android:src="@drawable/symbol_ranged"
-                android:id="@+id/imgRangedId"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:adjustViewBounds="true"
-                android:layout_marginLeft="@dimen/dice_margin"
-                android:contentDescription="Image of Ranged Dice"
-                android:layout_marginRight="@dimen/dice_margin" />
-
-            <ImageView
-                android:layout_width="@dimen/dice_dimension"
-                android:layout_height="@dimen/dice_dimension"
-                android:src="@drawable/symbol_crit"
-                android:id="@+id/imgCritId"
-                android:layout_weight="1"
-                android:scaleType="fitXY"
-                android:adjustViewBounds="true"
-                android:layout_marginLeft="@dimen/dice_margin"
-                android:layout_marginRight="@dimen/dice_margin"
-                android:contentDescription="Image of Critical Dice" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textResultMeleeId"
                 android:layout_weight="1"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_alignBottom="@+id/imgMeleeId"
+                android:layout_alignRight="@+id/imgMeleeId"
+                android:layout_alignEnd="@+id/imgMeleeId"
                 android:textSize="@dimen/resultText"
-                tools:text="0"
-                android:textColor="@android:color/background_dark"
-                android:textAlignment="center"
-                android:layout_marginLeft="@dimen/top_dice_margin"
-                android:layout_marginRight="@dimen/top_dice_margin" />
+                android:textStyle="normal|bold"
+                tools:text="0" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textResultRangedId"
+            <ImageView
+                android:layout_width="@dimen/offensive_dice_dimension"
+                android:layout_height="@dimen/dice_dimension_heigth"
+                android:src="@drawable/symbol_crit"
+                android:id="@+id/imgCritId"
                 android:layout_weight="1"
-                android:textSize="@dimen/resultText"
-                tools:text="0"
-                android:textColor="@android:color/background_dark"
-                android:textAlignment="center"
-                android:layout_marginLeft="@dimen/top_dice_margin"
-                android:layout_marginRight="@dimen/top_dice_margin" />
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:contentDescription="Image of Critical Dice"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textResultCritId"
                 android:layout_weight="1"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_alignBottom="@+id/imgCritId"
+                android:layout_alignRight="@+id/imgCritId"
+                android:layout_alignEnd="@+id/imgCritId"
                 android:textSize="@dimen/resultText"
-                tools:text="0"
-                android:textColor="@android:color/background_dark"
-                android:textAlignment="center"
-                android:layout_marginLeft="@dimen/top_dice_margin"
-                android:layout_marginRight="@dimen/top_dice_margin" />
+                android:textStyle="normal|bold"
+                tools:text="0" />
 
-        </GridLayout>
+            <ImageView
+                android:layout_width="@dimen/offensive_dice_dimension"
+                android:layout_height="@dimen/dice_dimension_heigth"
+                android:src="@drawable/symbol_ranged"
+                android:id="@+id/imgRangedId"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:contentDescription="Image of Ranged Dice"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textResultRangedId"
+                android:layout_weight="1"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_alignBottom="@+id/imgRangedId"
+                android:layout_alignRight="@+id/imgRangedId"
+                android:layout_alignEnd="@+id/imgRangedId"
+                android:textSize="@dimen/resultText"
+                android:textStyle="normal|bold"
+                tools:text="0" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:background="@android:color/black"
-            android:layout_height="10dp" />
+            android:layout_height="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"/>
 
-        <GridLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="2"
             android:id="@+id/gridDefensiveResultId"
-            android:rowCount="2"
             android:layout_below="@+id/gridOffensiveResultId"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textResultDefenseId"
-                android:layout_weight="1"
-                android:textSize="@dimen/resultText"
-                tools:text="0"
-                android:textColor="@android:color/background_dark"
-                android:textAlignment="center"
-                android:layout_marginLeft="@dimen/bottom_grid_text_margin"
-                android:layout_marginRight="@dimen/bottom_grid_text_margin" />
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textResultCritDefenseId"
-                android:layout_weight="1"
-                android:textSize="@dimen/resultText"
-                tools:text="0"
-                android:textColor="@android:color/background_dark"
-                android:textAlignment="center"
-                android:layout_marginLeft="@dimen/bottom_grid_text_margin"
-                android:layout_marginRight="@dimen/bottom_grid_text_margin" />
-
             <ImageView
-                android:layout_width="@dimen/dice_dimension"
-                android:layout_height="@dimen/dice_dimension"
                 android:src="@drawable/symbol_block"
                 android:id="@+id/imgResultDefenseId"
                 android:layout_weight="1"
@@ -153,19 +129,50 @@
                 android:adjustViewBounds="false"
                 android:layout_marginLeft="@dimen/botton_grid_dice_margin"
                 android:layout_marginRight="@dimen/botton_grid_dice_margin"
-                android:contentDescription="Image of Critical Defensive Dice" />
+                android:contentDescription="Image of Critical Defensive Dice"
+                android:layout_width="@dimen/dice_dimension"
+                android:layout_height="@dimen/dice_dimension_heigth" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textResultDefenseId"
+                android:layout_weight="1"
+                android:textColor="@android:color/holo_orange_dark"
+                android:layout_alignBottom="@+id/imgResultDefenseId"
+                android:layout_alignRight="@+id/imgResultDefenseId"
+                android:layout_alignEnd="@+id/imgResultDefenseId"
+                android:textSize="@dimen/resultText"
+                android:textStyle="normal|bold"
+                tools:text="0" />
 
             <ImageView
                 android:layout_width="@dimen/dice_dimension"
-                android:layout_height="@dimen/dice_dimension"
+                android:layout_height="@dimen/dice_dimension_heigth"
                 android:src="@drawable/symbol_critblock"
                 android:id="@+id/imgResultCritDefenseId"
                 android:layout_weight="1"
                 android:scaleType="fitCenter"
-                android:layout_marginLeft="@dimen/botton_grid_dice_margin"
-                android:layout_marginRight="@dimen/botton_grid_dice_margin"
-                android:contentDescription="Image of Defensive Dice" />
-        </GridLayout>
+                android:contentDescription="Image of Defensive Dice"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="32dp"
+                android:layout_marginEnd="32dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textResultCritDefenseId"
+                android:layout_weight="1"
+                android:textColor="@android:color/holo_orange_dark"
+                android:layout_alignBottom="@+id/imgResultCritDefenseId"
+                android:layout_alignRight="@+id/imgResultCritDefenseId"
+                android:layout_alignEnd="@+id/imgResultCritDefenseId"
+                android:textSize="@dimen/resultText"
+                android:textStyle="normal|bold"
+                tools:text="0" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -173,6 +180,17 @@
             android:layout_height="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp" />
+
+        <TextView
+            android:text="@string/damage_results"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textSize="@dimen/damage_result_title"
+            android:textStyle="normal|bold"
+            android:textColor="@color/colorBlack" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -185,17 +203,17 @@
                 android:id="@+id/woundImage"
                 android:layout_weight="1"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_marginLeft="19dp"
-                android:layout_marginStart="19dp" />
+                android:layout_marginStart="19dp"
+                android:layout_alignParentLeft="true" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/meleeWoundResult"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:layout_alignBottom="@+id/woundImage"
                 android:layout_alignRight="@+id/woundImage"
                 android:layout_alignEnd="@+id/woundImage"
@@ -220,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/rangedWoundResult"
                 android:layout_weight="1"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:layout_alignBottom="@+id/woundImage2"
                 android:layout_alignRight="@+id/woundImage2"
                 android:layout_alignEnd="@+id/woundImage2"

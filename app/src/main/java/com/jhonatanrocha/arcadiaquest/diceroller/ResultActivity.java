@@ -93,9 +93,9 @@ public class ResultActivity extends Activity {
         }
 
         setTextViewOfensiveResult(meleeTotal, rangedTotal, criticalTotal);
-        setSideMarginsToOfensiveTextView(textMeleeTotalResult);
+        /*setSideMarginsToOfensiveTextView(textMeleeTotalResult);
         setSideMarginsToOfensiveTextView(textRangedTotalResult);
-        setSideMarginsToOfensiveTextView(textCriticalTotalResult);
+        setSideMarginsToOfensiveTextView(textCriticalTotalResult);*/
     }
 
     protected void calculateDefensive() {
@@ -130,7 +130,7 @@ public class ResultActivity extends Activity {
         textDefensiveCritTotalResult.setText(blockCriticalTotal.toString());
     }
 
-    protected void setSideMarginsToOfensiveTextView(TextView textview) {
+    /*protected void setSideMarginsToOfensiveTextView(TextView textview) {
         final Integer textViewIntValue = Integer.parseInt(textview.getText().toString());
 
         if(textViewIntValue >= 10) {
@@ -138,7 +138,7 @@ public class ResultActivity extends Activity {
             layoutparams.setMargins(15, 0, 15, 0);
             textview.setLayoutParams(layoutparams);
         }
-    }
+    }*/
 
     protected void setSideMarginsToDefensiveTextView(TextView textview) {
         final Integer textViewIntValue = Integer.parseInt(textview.getText().toString());
