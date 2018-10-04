@@ -19,37 +19,35 @@ public class ResultActivity extends Activity {
     private TextView textCriticalTotalResult;
     private TextView textDefensiveTotalResult;
     private TextView textDefensiveCritTotalResult;
+    private TextView textMeleeWoundResult;
+    private TextView textRangedWoundResult;
     private Integer inputOfensiveValue;
     private Integer inputDefensiveValue;
+    private Integer meleeTotal = 0;
+    private Integer rangedTotal = 0;
+    private Integer criticalTotal = 0;
+    private Integer blockTotal = 0;
+    private Integer blockCriticalTotal = 0;
+    private Integer inputOffensiveReroll;
+    private Integer inputDefensiveReroll;
     private Boolean flagOffensiveReroll;
     private Boolean flagDefensiveReroll;
     private Boolean flagMeleeReroll;
     private Boolean flagRangedReroll;
-    private Integer inputOffensiveReroll;
-    private Integer inputDefensiveReroll;
-    private ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_result);
-
         textMeleeTotalResult  = (TextView) findViewById(R.id.textResultMeleeId);
         textRangedTotalResult = (TextView) findViewById(R.id.textResultRangedId);
         textCriticalTotalResult = (TextView) findViewById(R.id.textResultCritId);
         textDefensiveTotalResult  = (TextView) findViewById(R.id.textResultDefenseId);
         textDefensiveCritTotalResult = (TextView) findViewById(R.id.textResultCritDefenseId);
-        backButton = (ImageView) findViewById(R.id.imgBackButtonId);
-
+        textMeleeWoundResult = (TextView) findViewById(R.id.meleeWoundResult);
+        textRangedWoundResult = (TextView) findViewById(R.id.rangedWoundResult);
         initResult();
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
     @Override
@@ -65,15 +63,13 @@ public class ResultActivity extends Activity {
         initReroll(extras);
         calculateOfensive();
         calculateDefensive();
+        calculateWounds(meleeTotal, rangedTotal,
+                criticalTotal, blockTotal, blockCriticalTotal);
     }
 
     protected void calculateOfensive() {
-
         final Random generator = new Random();
         Integer ofensiveResult  = 0;
-        Integer meleeTotal = 0;
-        Integer rangedTotal = 0;
-        Integer criticalTotal = 0;
 
         for(int i = 0; i < inputOfensiveValue; i++) {
             ofensiveResult  = generator.nextInt(6) + 1;
@@ -103,11 +99,8 @@ public class ResultActivity extends Activity {
     }
 
     protected void calculateDefensive() {
-
         final Random generator = new Random();
         Integer defensiveResult = 0;
-        Integer blockTotal = 0;
-        Integer blockCriticalTotal = 0;
 
         for(int i = 0; i < inputDefensiveValue; i++) {
             defensiveResult = generator.nextInt(6) + 1;
@@ -166,5 +159,29 @@ public class ResultActivity extends Activity {
         inputDefensiveReroll = Integer.parseInt(extras.getString("inputRerollDefensiveValue"));
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    protected void calculateWounds(final Integer meleeTotal, final Integer rangedTotal,
+                                   final Integer criticalTotal, final Integer blockTotal, final Integer blockCriticalTotal) {
+        Integer calculatedMeleeWounds = 0;
+        Integer calculatedRangedWounds = 0;
+        final Integer totalMeleeResult = meleeTotal + criticalTotal;
+        final Integer totalRangedResult = rangedTotal + criticalTotal;
+        final Integer totalBlockedResult = blockTotal + blockCriticalTotal;
+
+        if(totalMeleeResult > 0 && totalMeleeResult > totalBlockedResult) {
+            calculatedMeleeWounds = totalMeleeResult - totalBlockedResult;
+        }
+
+        if(totalRangedResult > 0 && totalRangedResult > totalBlockedResult) {
+            calculatedRangedWounds = totalRangedResult - totalBlockedResult;
+        }
+
+        textMeleeWoundResult.setText(calculatedMeleeWounds.toString());
+        textRangedWoundResult.setText(calculatedRangedWounds.toString());
+    }
 }
 
