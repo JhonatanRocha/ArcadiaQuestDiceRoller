@@ -11,8 +11,6 @@
     <dimen name="dice_margin">3dp</dimen>
     <dimen name="label_title">20dp</dimen>
     <dimen name="botton_grid_dice_margin">30dp</dimen>
-    <dimen name="bottom_grid_text_margin">65dp</dimen>
-    <dimen name="top_dice_margin">30dp</dimen>
     <dimen name="main_dice_dimension">70dp</dimen>
     <dimen name="checkboxLabelSize">14dp</dimen>
     <dimen name="damage_result_title">30dp</dimen>
