@@ -23,6 +23,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <!-- <activity android:name=".MainTabsActivity"></activity> -->
+        <activity android:name=".ResultRespawnActivity"></activity>
     </application>
 
 </manifest>

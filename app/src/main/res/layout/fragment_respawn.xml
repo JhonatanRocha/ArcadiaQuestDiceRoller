@@ -1,13 +1,54 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jhonatanrocha.arcadiaquest.diceroller.fragment.RespawnFragment">
+    tools:context="com.jhonatanrocha.arcadiaquest.diceroller.fragment.RespawnFragment"
+    android:background="@drawable/background_acdr">
 
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fragmento do Respawn"
-        android:layout_gravity="center_vertical|center_horizontal" />
+        android:layout_gravity="center_vertical|center_horizontal">
 
+        <ImageView
+            android:src="@drawable/header_respawn"
+            android:id="@+id/respawnAsset"
+            android:layout_weight="1"
+            android:adjustViewBounds="false"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="100dp"
+            android:layout_width="250dp"
+            android:layout_height="200dp" />
+
+        <ImageButton
+            android:src="@drawable/gravestone"
+            android:id="@+id/graveyardImageButton"
+            android:layout_width="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center"
+            android:cropToPadding="true"
+            android:layout_height="100dp" />
+
+        <TextView
+            android:id="@+id/titleRespawnButton"
+            android:text="RESPAWNAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:textSize="@dimen/label_title"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="center" />
+
+    </LinearLayout>
 </FrameLayout>

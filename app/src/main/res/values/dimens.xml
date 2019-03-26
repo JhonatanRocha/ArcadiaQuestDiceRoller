@@ -14,4 +14,7 @@
     <dimen name="main_dice_dimension">70dp</dimen>
     <dimen name="checkboxLabelSize">14dp</dimen>
     <dimen name="damage_result_title">30dp</dimen>
+    <dimen name="graveyard_tile">170dp</dimen>
+    <dimen name="graveyard_tile_number">30dp</dimen>
+    <dimen name="graveyard_dice">30dp</dimen>
 </resources>
